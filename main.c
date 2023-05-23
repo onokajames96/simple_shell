@@ -12,25 +12,46 @@
 int main(int argc __attribute__((unused)), char **argv)
 {
 char *prompt = ("$");
-char *line = NULL;
+char *line = NULL, *line_copy = NULL;
+char *token;
 size_t buffsize = 0;
 ssize_t input_length;
 int i;
-while(1)
+int count_tokens = 0;
+while (1)
 {
 printf("%s", prompt);
-input_length = (getline(&line, &buffsize, stdin) == -1);
-if (feof(stdin))
+input_length = getline(&line, &buffsize, stdin);
+
+if (input_length == -1)
 {
-free(line);
-exit(EXIT_SUCCESS);
+printf("exit shell...\n");
+return (-1);
 }
-else
+line_copy = malloc(sizeof(char) * input_length);
+if (line_copy == NULL)
 {
-free(line);
-perror("error while reading the line from stdin");
-exit(EXIT_FAILURE);
+perror("memory allocation error");
+return (-1);
 }
+strcpy(line_copy, line);
+token = strtok(line, TOKEN_DELIM);
+while (token != NULL)
+{
+count_tokens++;
+token = strtok(NULL, TOKEN_DELIM);
+}
+count_tokens++;
+argv = malloc(sizeof(char *) * count_tokens);
+token = strtok(line_copy, TOKEN_DELIM);
+for (i = 0; token != NULL; i++)
+{
+argv[i] = malloc(sizeof(char) * strlen(token));
+strcpy(argv[i], token);
+token = strtok(NULL, TOKEN_DELIM);
+}
+free(line_copy);
+free(line);
 }
 return (0);
 }
