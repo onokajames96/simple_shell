@@ -1,2 +1,2 @@
 # Simple shell
-our main 
+our main  objective is make shell  
