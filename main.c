@@ -22,7 +22,7 @@ printf("%s", prompt);
 input_length = (getline(&line, &buffsize, stdin) == -1);
 if (feof(stdin))
 {
-free(line); /* avoid memory leaks when ctrl + d */
+free(line);
 exit(EXIT_SUCCESS);
 }
 else
