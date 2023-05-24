@@ -1,17 +1,17 @@
 #include "shell.h"
 void execute_command(char **argv)
 {
-    char *Cmd = NULL, *Cmd_path = NULL;
+    char *command = NULL, *command_path = NULL;
 
     if (argv){
         /* get the command */
-        Cmd = argv[0];
+        command = argv[0];
 
         /* generate the path to this command before passing it to execve */
-        Cmd_path = get_path(Cmd);
+        command_path = get_path(command);
 
         /* execute the actual command with execve */
-        if (execve(Cmd_path, argv, NULL) == -1){
+        if (execve(command_path, argv, NULL) == -1){
             perror("Error:");
         }
     }
