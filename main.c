@@ -9,7 +9,7 @@
  *
  * Return: 0 on success
  */
-int main(int argc __attribute__((unused)), char **argv)
+int main(int argc, char **argv)
 {
 char *prompt = ("$");
 char *line = NULL, *line_copy = NULL;
@@ -18,6 +18,7 @@ size_t buffsize = 0;
 ssize_t input_length;
 int i;
 int count_tokens = 0;
+(void)argc;
 while (1)
 {
 printf("%s", prompt);
