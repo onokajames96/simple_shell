@@ -10,5 +10,6 @@
 #include<sys/wait.h>
 #include<sys/stat.h>
 char *get_path(char *command);
+void execute_command(char **argv) __attribute__((unused));
 
 #endif /* SHELL_H*/
