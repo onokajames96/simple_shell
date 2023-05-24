@@ -1,5 +1,4 @@
 #include "shell.h"
-void execute_command(char **argv) __attribute__((unused));
 void execute_command(char **argv)
 {
     char *Cmd = NULL, *Cmd_path = NULL;
