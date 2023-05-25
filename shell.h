@@ -11,4 +11,4 @@
 #include<sys/stat.h>
 char *get_path(char *command);
 void exemycmd(char **argv);
-#endif /* SHELL_H*
+#endif 
