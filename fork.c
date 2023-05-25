@@ -1,4 +1,4 @@
-#include "main.h"
+#include "shell.h"
 
 /**
  * new_fork - creation of  a new process.
