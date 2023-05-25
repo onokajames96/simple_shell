@@ -1,58 +1,23 @@
-#include "shell.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "main.h"
 
 /**
- * main - main function.
- * @argc : argument count.
- * @argv : argument vector.
+ * main - checks if  shell is called.
  *
  * Return: 0 on success
+ *
  */
-int main(int argc, char **argv)
+int main(void)
 {
-char *prompt = ("$");
-char *line = NULL, *line_copy = NULL;
-char *token;
-size_t buffsize = 0;
-ssize_t input_length;
-int i;
-int count_tokens = 0;
-(void)argc;
 while (1)
 {
-printf("%s", prompt);
-input_length = getline(&line, &buffsize, stdin);
-
-if (input_length == -1)
+if (isatty(STDIN_FILENO) == 1)
 {
-printf("exit shell...\n");
-return (-1);
+interactive();
 }
-line_copy = malloc(sizeof(char) * input_length);
-if (line_copy == NULL)
+else
 {
-perror("memory allocation error");
-return (-1);
+non_interactive();
 }
-strcpy(line_copy, line);
-token = strtok(line, TOKEN_DELIM);
-while (token != NULL)
-{
-count_tokens++;
-token = strtok(NULL, TOKEN_DELIM);
-}
-count_tokens++;
-argv = malloc(sizeof(char *) * count_tokens);
-token = strtok(line_copy, TOKEN_DELIM);
-for (i = 0; token != NULL; i++)
-{
-argv[i] = malloc(sizeof(char) * strlen(token));
-strcpy(argv[i], token);
-token = strtok(NULL, TOKEN_DELIM);
-}
-free(line_copy);
-free(line);
 }
 return (0);
 }
